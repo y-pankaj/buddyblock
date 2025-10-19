@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BuddyBlock Options</title>
+  <meta charset="UTF-8">
+  <style>
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+      width: 600px; 
+      padding: 20px; 
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+      border-bottom: 3px solid #3498db;
+      padding-bottom: 10px;
+    }
+    
+    .section {
+      margin: 30px 0;
+      padding: 20px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+    
+    .section h3 {
+      margin-top: 0;
+      color: #34495e;
+    }
+    
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      box-sizing: border-box;
+      margin: 10px 0;
+    }
+    
+    input[type="text"]:focus {
+      border-color: #3498db;
+      outline: none;
+    }
+    
+    .btn-primary {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      margin: 10px 5px 10px 0;
+    }
+    
+    .btn-primary:hover {
+      background-color: #2980b9;
+    }
+    
+    .btn-secondary {
+      background-color: #95a5a6;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      margin: 5px;
+    }
+    
+    .btn-secondary:hover {
+      background-color: #7f8c8d;
+    }
+    
+    .btn-danger {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      margin: 10px 5px 10px 0;
+    }
+    
+    .btn-danger:hover {
+      background-color: #c0392b;
+    }
+    
+    .btn-danger:disabled {
+      background-color: #95a5a6;
+      cursor: not-allowed;
+    }
+    
+    .site-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      margin: 8px 0;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+    
+    .site-item span {
+      font-weight: 500;
+    }
+    
+    .status-message {
+      padding: 12px;
+      margin: 15px 0;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+    
+    .status-message.success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    
+    .status-message.error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    
+    .status-message.info {
+      background-color: #cce7ff;
+      color: #004085;
+      border: 1px solid #b8daff;
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    .info-box {
+      background: #e8f4fd;
+      border: 1px solid #b8daff;
+      border-radius: 6px;
+      padding: 15px;
+      margin: 15px 0;
+    }
+    
+    .info-box p {
+      margin: 0;
+      color: #004085;
+      font-size: 14px;
+    }
+    
+    .qr-container {
+      text-align: center;
+      margin: 20px 0;
+      padding: 20px;
+      background: white;
+      border: 2px solid #3498db;
+      border-radius: 10px;
+    }
+    
+    .qr-actions {
+      margin-top: 15px;
+    }
+    
+    .qr-info {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #666;
+    }
+    
+    .danger-zone {
+      margin-top: 40px;
+      padding: 20px;
+      border: 2px solid #e74c3c;
+      border-radius: 8px;
+      background-color: #fff5f5;
+    }
+    
+    .danger-zone h3 {
+      color: #e74c3c;
+      margin-top: 0;
+    }
+    
+    .reset-section {
+      margin-top: 15px;
+    }
+    
+    .error-message {
+      color: #e74c3c;
+      margin-top: 10px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>BuddyBlock Options</h1>
+    
+    <!-- Setup Warning Banner -->
+    <div id="setupWarning" class="status-message error hidden">
+      ⚠️ <strong>Setup Required:</strong> You must complete the initial setup before adding websites to block. 
+      <a href="setup.html" style="color: #721c24; text-decoration: underline; font-weight: bold;">Complete Setup Now</a>
+    </div>
+    
+    <!-- Status Message -->
+    <div id="statusMessage" class="status-message hidden"></div>
+    
+    <!-- Blocked Sites Management -->
+    <div class="section">
+      <h3>Blocked Sites</h3>
+      <p>Add websites to block (e.g., facebook.com, twitter.com):</p>
+      <input type="text" id="newSite" placeholder="Enter website domain">
+      <button id="addSiteBtn" class="btn-primary">Add Site</button>
+      
+      <div id="blockedSitesList" style="margin-top: 20px;">
+        <!-- Sites will be populated here -->
+      </div>
+    </div>
+    
+    <!-- TOTP Setup Section -->
+    <div class="section">
+      <h3>One-Time Code Authentication</h3>
+      
+      <div class="info-box">
+        <p><strong>✅ Setup Complete:</strong> Your one-time code authentication is configured and protecting your blocked sites.</p>
+      </div>
+      
+      <!-- TOTP verification section for showing QR on new device -->
+      <div id="totpVerificationSection">
+        <h4>Show Setup QR for New Device</h4>
+        <p>Need to set up the authenticator on a new phone? Enter your current one-time code to display the setup QR:</p>
+        <input type="text" id="totpInput" placeholder="6-digit code" maxlength="6">
+        <button id="showSetupQRBtn" class="btn-primary">Show Setup QR</button>
+        <div class="info-box">
+          <p><strong>Use case:</strong> Setting up the authenticator on a new phone or sharing access with authorized users.</p>
+        </div>
+      </div>
+      
+      <!-- Hidden first time section (no longer used, setup is mandatory at install) -->
+      <div id="firstTimeSection" class="hidden" style="display: none;">
+        <p>Set up your authenticator app by scanning the QR code below. <strong>You can only do this once!</strong></p>
+        <button id="generateTOTPBtn" class="btn-primary">Generate One-Time Code Setup QR</button>
+      </div>
+    </div>
+    
+    <!-- QR Display Section -->
+    <div id="qrContainer" class="qr-container hidden">
+      <h3 id="qrTitle">QR Code</h3>
+      <canvas id="qrCanvas"></canvas>
+      <div class="qr-actions">
+        <button id="downloadQRBtn" class="btn-secondary">Download PNG</button>
+        <button id="clearQRBtn" class="btn-secondary">Hide QR</button>
+      </div>
+      <div class="qr-info">
+        <p><small>This QR contains your one-time code setup. Anyone who scans it can generate bypass codes.</small></p>
+      </div>
+    </div>
+    
+    <!-- Danger Zone -->
+    <div id="dangerZone" class="danger-zone">
+      <h3>⚠️ Danger Zone</h3>
+      <div class="reset-section">
+        <h4>Reset All Settings</h4>
+        <p>This will permanently delete all blocked sites and one-time code configuration.</p>
+        
+        <!-- Show different UI based on TOTP setup status -->
+        <div id="resetWithTOTP" class="hidden">
+          <p><strong>Enter your one-time code to confirm reset:</strong></p>
+          <input type="text" id="resetTotpInput" placeholder="6-digit code" maxlength="6">
+          <button id="resetWithTOTPBtn" class="btn-danger">Reset All Settings</button>
+          <div id="resetError" class="error-message"></div>
+        </div>
+        
+        <div id="resetWithoutTOTP" class="hidden">
+          <p><em>One-time code not set up yet. Reset is available without verification.</em></p>
+          <button id="resetWithoutTOTPBtn" class="btn-danger">Reset All Settings</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOTP Removal Modal -->
+    <div id="totpRemoveModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Verify One-Time Code to Remove Site</h2>
+          <button id="closeModal" class="close-btn" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>You are about to remove: <strong id="siteToRemove"></strong></p>
+          <p>Enter your one-time code to confirm removal:</p>
+          <input type="text" id="totpRemoveInput" placeholder="6-digit code" maxlength="6" autocomplete="off">
+          <div id="totpRemoveError" class="error-message"></div>
+        </div>
+        <div class="modal-footer">
+          <button id="cancelRemove" class="btn-secondary">Cancel</button>
+          <button id="confirmRemove" class="btn-danger">Remove Site</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal styles -->
+    <style>
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .modal.hidden {
+        display: none;
+      }
+
+      .modal-content {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        width: 90%;
+        max-width: 400px;
+        animation: slideIn 0.3s ease-out;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .modal-header h2 {
+        margin: 0;
+        color: #2c3e50;
+        font-size: 18px;
+      }
+
+      .close-btn {
+        background: none;
+        border: none;
+        font-size: 28px;
+        cursor: pointer;
+        color: #666;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .close-btn:hover {
+        color: #000;
+      }
+
+      .modal-body {
+        padding: 20px;
+      }
+
+      .modal-body p {
+        margin: 10px 0;
+        color: #333;
+      }
+
+      .modal-body p strong {
+        color: #e74c3c;
+      }
+
+      .modal-body input[type="text"] {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 6px;
+        font-size: 16px;
+        box-sizing: border-box;
+        margin: 10px 0;
+        letter-spacing: 4px;
+        text-align: center;
+      }
+
+      .modal-body input[type="text"]:focus {
+        border-color: #3498db;
+        outline: none;
+      }
+
+      .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        padding: 15px 20px;
+        border-top: 1px solid #e0e0e0;
+        background-color: #f9f9f9;
+        border-radius: 0 0 10px 10px;
+      }
+
+      .modal-footer button {
+        padding: 10px 20px;
+      }
+    </style>
+  </div>
+
+  <script src="lib/otpauth.umd.min.js"></script>
+  <script src="lib/qrcode.min.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

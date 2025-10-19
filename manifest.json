@@ -1,0 +1,50 @@
+{
+    "manifest_version": 3,
+    "name": "Simple Site Blocker",
+    "version": "1.0",
+    "description": "A simple extension to block a list of websites.",
+    "permissions": [
+      "storage",
+      "webNavigation"
+    ],
+    "host_permissions": [
+      "<all_urls>"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "options_page": "options.html",
+    "action": {
+      "default_icon": {
+        "16": "icons/icon128.png",
+        "48": "icons/icon128.png",
+        "128": "icons/icon128.png"
+      }
+    },
+    "icons": {
+      "16": "icons/icon128.png",
+      "48": "icons/icon128.png",
+      "128": "icons/icon128.png"
+    },
+    "web_accessible_resources": [
+      {
+        "resources": [
+          "blocked.html",
+          "blocked.js",
+          "options.html",
+          "options.js",
+          "setup.html",
+          "setup.js",
+          "lib/otpauth.umd.min.js",
+          "lib/qrcode.min.js"
+        ],
+        "matches": ["<all_urls>"]
+      }
+    ],
+    "content_scripts": [
+      {
+        "matches": ["http://*/*", "https://*/*"],
+        "js": ["content.js"]
+      }
+    ]
+  }
