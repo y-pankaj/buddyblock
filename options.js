@@ -284,7 +284,7 @@ function generateInitialTOTPSetup() {
     const secret = generateTOTPSecret();
     
     // Create TOTP URI (this is what gets encoded in the QR)
-    const uri = `otpauth://totp/SiteBlocker?secret=${secret}&issuer=SiteBlocker&algorithm=SHA1&digits=6&period=30`;
+    const uri = `otpauth://totp/BuddyBlock?secret=${secret}&issuer=BuddyBlock&algorithm=SHA1&digits=6&period=30`;
     
     // Generate and display QR code
     generateQRCodeWithData(uri, 'One-Time Code Setup - Scan with Authenticator App');
@@ -372,7 +372,7 @@ function downloadQR() {
     
     // Generate filename based on current timestamp
     const timestamp = new Date().toISOString().split('T')[0];
-    link.download = `site-blocker-totp-setup-${timestamp}.png`;
+    link.download = `buddyblock-totp-setup-${timestamp}.png`;
     link.href = canvas.toDataURL();
     link.click();
     
