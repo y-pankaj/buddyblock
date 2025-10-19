@@ -1,83 +1,269 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>BuddyBlock Options</title>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BuddyBlock Options</title>
   <style>
-    body { 
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-      width: 600px; 
-      padding: 20px; 
-      background-color: #f8f9fa;
-      color: #333;
+    /* CSS Variables - Swiss Design System */
+    :root {
+      --color-black: #000000;
+      --color-white: #FFFFFF;
+      --color-red: #e30613;
+      --color-gray: #e0e0e0;
+      --color-gray-light: #f8f8f8;
+      --color-gray-dark: #999999;
+      --color-gray-medium: #95a5a6;
+      
+      --font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      
+      --spacing-xs: 8px;
+      --spacing-sm: 16px;
+      --spacing-md: 24px;
+      --spacing-lg: 32px;
+      --spacing-xl: 40px;
+      --spacing-xxl: 48px;
+      
+      --transition-speed: 0.2s;
     }
     
-    .container {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    /* Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
     
+    body {
+      font-family: var(--font-family);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--color-black);
+      background-color: var(--color-white);
+      background-image: 
+        repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.02) 0px, transparent 1px, transparent 20px, rgba(0, 0, 0, 0.02) 21px),
+        repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.02) 0px, transparent 1px, transparent 20px, rgba(0, 0, 0, 0.02) 21px);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: var(--spacing-lg);
+    }
+    
+    body > * {
+      width: 600px;
+      max-width: 100%;
+    }
+    
+    /* Page Title */
     h1 {
-      color: #2c3e50;
-      margin-bottom: 10px;
-      border-bottom: 3px solid #3498db;
-      padding-bottom: 10px;
+      font-size: 32px;
+      font-weight: 700;
+      border-bottom: 2px solid var(--color-red);
+      padding-bottom: var(--spacing-sm);
+      margin-bottom: var(--spacing-lg);
     }
     
+    /* Section */
     .section {
-      margin: 30px 0;
-      padding: 20px;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      background: #fafafa;
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    /* Primary Section - Blocked Sites */
+    .section.primary {
+      background-color: var(--color-white);
+      border: 3px solid var(--color-black);
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-xxl);
+    }
+    
+    .section.primary h3 {
+      font-size: 24px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: var(--spacing-md);
+      padding-bottom: var(--spacing-sm);
+      border-bottom: 3px solid var(--color-red);
+      color: var(--color-black);
+    }
+    
+    .section.primary p {
+      margin-bottom: var(--spacing-md);
+      font-size: 18px;
+      font-weight: 500;
+    }
+    
+    /* Secondary Sections */
+    .section.secondary {
+      background-color: var(--color-gray-light);
+      border: 1px solid var(--color-gray);
+      padding: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .section.secondary h3 {
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--spacing-sm);
+      padding-bottom: var(--spacing-xs);
+      border-bottom: 1px solid var(--color-gray-dark);
+      color: var(--color-gray-dark);
+    }
+    
+    .section.secondary p {
+      margin-bottom: var(--spacing-sm);
+      font-size: 14px;
+      color: var(--color-gray-dark);
+    }
+    
+    .section.secondary h4 {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: var(--spacing-sm);
+      color: var(--color-black);
     }
     
     .section h3 {
-      margin-top: 0;
-      color: #34495e;
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: var(--spacing-sm);
+      padding-bottom: var(--spacing-xs);
+      border-bottom: 2px solid var(--color-gray);
+    }
+    
+    .section p {
+      margin-bottom: var(--spacing-sm);
+      font-size: 16px;
+    }
+    
+    .section h4 {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    /* Input and Button Combo */
+    .input-group {
+      display: flex;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    /* Primary input styling for blocked sites */
+    .section.primary .input-group {
+      gap: var(--spacing-md);
+    }
+    
+    .section.primary input[type="text"] {
+      flex: 1;
+      border: none;
+      border-bottom: 3px solid var(--color-black);
+      background: transparent;
+      padding: var(--spacing-md) 0;
+      font-family: var(--font-family);
+      font-size: 20px;
+      font-weight: 500;
+      transition: border-color var(--transition-speed) ease;
+    }
+    
+    .section.primary input[type="text"]:focus {
+      outline: none;
+      border-bottom-color: var(--color-red);
     }
     
     input[type="text"] {
-      width: 100%;
-      padding: 12px;
-      border: 2px solid #ddd;
-      border-radius: 6px;
+      flex: 1;
+      border: none;
+      border-bottom: 2px solid var(--color-black);
+      background: transparent;
+      padding: var(--spacing-sm) 0;
+      font-family: var(--font-family);
+      font-size: 16px;
+      transition: border-color var(--transition-speed) ease;
+    }
+    
+    .section.secondary input[type="text"] {
+      border-bottom: 1px solid var(--color-gray-dark);
       font-size: 14px;
-      box-sizing: border-box;
-      margin: 10px 0;
+    }
+    
+    .section.secondary input[type="text"]:focus {
+      border-bottom-color: var(--color-black);
     }
     
     input[type="text"]:focus {
-      border-color: #3498db;
       outline: none;
+      border-bottom-color: var(--color-red);
     }
     
+    input[type="text"]::placeholder {
+      color: var(--color-gray-dark);
+    }
+    
+    input[type="text"][maxlength="6"] {
+      font-size: 28px;
+      letter-spacing: 8px;
+      text-align: center;
+    }
+    
+    /* Buttons */
     .btn-primary {
-      background-color: #3498db;
-      color: white;
+      background-color: var(--color-red);
+      color: var(--color-white);
       border: none;
-      padding: 12px 24px;
-      border-radius: 6px;
-      cursor: pointer;
+      padding: var(--spacing-sm) var(--spacing-xxl);
+      font-family: var(--font-family);
       font-size: 14px;
-      margin: 10px 5px 10px 0;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background-color var(--transition-speed) ease;
+      white-space: nowrap;
     }
     
     .btn-primary:hover {
-      background-color: #2980b9;
+      background-color: var(--color-black);
+    }
+    
+    /* Primary section button styling */
+    .section.primary .btn-primary {
+      padding: var(--spacing-md) var(--spacing-xxl);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+    
+    /* Secondary section button styling */
+    .section.secondary .btn-primary {
+      background-color: var(--color-gray-medium);
+      padding: 10px 20px;
+      font-size: 12px;
+    }
+    
+    .section.secondary .btn-primary:hover {
+      background-color: #7f8c8d;
     }
     
     .btn-secondary {
-      background-color: #95a5a6;
-      color: white;
+      background-color: var(--color-gray-medium);
+      color: var(--color-white);
       border: none;
       padding: 10px 20px;
-      border-radius: 6px;
-      cursor: pointer;
+      font-family: var(--font-family);
       font-size: 14px;
-      margin: 5px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background-color var(--transition-speed) ease;
+      white-space: nowrap;
     }
     
     .btn-secondary:hover {
@@ -85,348 +271,416 @@
     }
     
     .btn-danger {
-      background-color: #e74c3c;
-      color: white;
+      background-color: var(--color-black);
+      color: var(--color-white);
       border: none;
-      padding: 12px 24px;
-      border-radius: 6px;
-      cursor: pointer;
+      padding: var(--spacing-sm) var(--spacing-xxl);
+      font-family: var(--font-family);
       font-size: 14px;
-      margin: 10px 5px 10px 0;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background-color var(--transition-speed) ease;
     }
     
     .btn-danger:hover {
-      background-color: #c0392b;
+      background-color: var(--color-red);
     }
     
     .btn-danger:disabled {
-      background-color: #95a5a6;
+      background-color: var(--color-gray-medium);
       cursor: not-allowed;
+    }
+    
+    /* Site List */
+    #blockedSitesList {
+      margin-top: var(--spacing-md);
     }
     
     .site-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px;
-      margin: 8px 0;
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 6px;
+      padding: var(--spacing-md);
+      border: 2px solid var(--color-black);
+      background-color: var(--color-white);
+      margin-bottom: var(--spacing-xs);
+      transition: all var(--transition-speed) ease;
+    }
+    
+    .site-item:hover {
+      background-color: var(--color-gray-light);
+      border-color: var(--color-red);
     }
     
     .site-item span {
-      font-weight: 500;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--color-black);
     }
     
+    /* Status Messages */
     .status-message {
-      padding: 12px;
-      margin: 15px 0;
-      border-radius: 6px;
+      padding: var(--spacing-sm);
+      margin-bottom: var(--spacing-md);
+      font-size: 14px;
       font-weight: 500;
     }
     
     .status-message.success {
-      background-color: #d4edda;
-      color: #155724;
-      border: 1px solid #c3e6cb;
+      background-color: var(--color-white);
+      border: 2px solid var(--color-black);
+      color: var(--color-black);
     }
     
     .status-message.error {
-      background-color: #f8d7da;
-      color: #721c24;
-      border: 1px solid #f5c6cb;
+      background-color: var(--color-black);
+      color: var(--color-white);
+      text-transform: uppercase;
     }
     
     .status-message.info {
-      background-color: #cce7ff;
-      color: #004085;
-      border: 1px solid #b8daff;
+      background-color: var(--color-gray-light);
+      border-left: 3px solid var(--color-red);
+      color: var(--color-black);
+    }
+    
+    .status-message a {
+      color: inherit;
+      text-decoration: underline;
+      font-weight: 700;
     }
     
     .hidden {
-      display: none;
+      display: none !important;
     }
     
+    /* Info Box */
     .info-box {
-      background: #e8f4fd;
-      border: 1px solid #b8daff;
-      border-radius: 6px;
-      padding: 15px;
-      margin: 15px 0;
+      background-color: var(--color-gray-light);
+      border-left: 3px solid var(--color-red);
+      padding: var(--spacing-sm);
+      margin: var(--spacing-sm) 0;
     }
     
     .info-box p {
-      margin: 0;
-      color: #004085;
       font-size: 14px;
+      margin: 0;
     }
     
+    /* QR Container */
     .qr-container {
       text-align: center;
-      margin: 20px 0;
-      padding: 20px;
-      background: white;
-      border: 2px solid #3498db;
-      border-radius: 10px;
+      margin: var(--spacing-md) 0;
+      padding: var(--spacing-sm);
+      border: 1px solid var(--color-gray-dark);
+      background-color: var(--color-white);
+    }
+    
+    .qr-container h3 {
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--spacing-sm);
+      border: none;
+      color: var(--color-black);
     }
     
     .qr-actions {
-      margin-top: 15px;
+      margin-top: var(--spacing-sm);
     }
     
     .qr-info {
-      margin-top: 10px;
-      font-size: 12px;
-      color: #666;
+      margin-top: var(--spacing-sm);
+      font-size: 11px;
+      color: var(--color-gray-dark);
     }
     
+    /* Danger Zone */
     .danger-zone {
-      margin-top: 40px;
-      padding: 20px;
-      border: 2px solid #e74c3c;
-      border-radius: 8px;
-      background-color: #fff5f5;
+      margin-top: var(--spacing-md);
+      padding: var(--spacing-md);
+      border: 1px solid var(--color-gray);
+      background-color: var(--color-gray-light);
     }
     
     .danger-zone h3 {
-      color: #e74c3c;
-      margin-top: 0;
+      color: var(--color-gray-dark);
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--spacing-sm);
+      padding-bottom: var(--spacing-xs);
+      border-bottom: 1px solid var(--color-gray-dark);
     }
     
     .reset-section {
-      margin-top: 15px;
+      margin-top: var(--spacing-sm);
+    }
+    
+    .reset-section p {
+      margin: var(--spacing-xs) 0;
+      font-size: 12px;
+      color: var(--color-gray-dark);
+    }
+    
+    .reset-section h4 {
+      font-size: 14px;
+      color: var(--color-black);
+    }
+    
+    .reset-section input[type="text"] {
+      border-bottom: 1px solid var(--color-gray-dark);
+      font-size: 20px;
+    }
+    
+    .reset-section .btn-danger {
+      background-color: var(--color-gray-medium);
+      padding: 10px 20px;
+      font-size: 12px;
+    }
+    
+    .reset-section .btn-danger:hover {
+      background-color: var(--color-red);
     }
     
     .error-message {
-      color: #e74c3c;
-      margin-top: 10px;
-      font-size: 14px;
+      color: var(--color-red);
+      margin-top: var(--spacing-sm);
+      font-size: 12px;
       font-weight: 500;
+      text-transform: uppercase;
+    }
+    
+    /* Modal */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    
+    .modal.hidden {
+      display: none;
+    }
+    
+    .modal-content {
+      background: var(--color-white);
+      max-width: 400px;
+      width: 90%;
+      border: 2px solid var(--color-black);
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--spacing-md);
+      border-bottom: 2px solid var(--color-gray);
+    }
+    
+    .modal-header h2 {
+      margin: 0;
+      color: var(--color-black);
+      font-size: 18px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--color-black);
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color var(--transition-speed) ease;
+    }
+    
+    .close-btn:hover {
+      color: var(--color-red);
+    }
+    
+    .modal-body {
+      padding: var(--spacing-md);
+    }
+    
+    .modal-body p {
+      margin: var(--spacing-sm) 0;
+      font-size: 14px;
+    }
+    
+    .modal-body p strong {
+      color: var(--color-red);
+      font-weight: 700;
+    }
+    
+    .modal-body input[type="text"] {
+      width: 100%;
+      margin: var(--spacing-sm) 0;
+      font-size: 28px;
+      letter-spacing: 8px;
+      text-align: center;
+    }
+    
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--spacing-sm);
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-top: 2px solid var(--color-gray);
+      background-color: var(--color-gray-light);
+    }
+    
+    /* Responsive */
+    @media (max-width: 600px) {
+      body {
+        padding: var(--spacing-sm);
+      }
+      
+      body > * {
+        width: 100%;
+      }
+      
+      h1 {
+        font-size: 28px;
+      }
+      
+      .input-group {
+        flex-direction: column;
+      }
+      
+      .btn-primary,
+      .btn-secondary,
+      .btn-danger {
+        width: 100%;
+        padding: var(--spacing-sm) var(--spacing-md);
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>BuddyBlock Options</h1>
-    
-    <!-- Setup Warning Banner -->
-    <div id="setupWarning" class="status-message error hidden">
-      ⚠️ <strong>Setup Required:</strong> You must complete the initial setup before adding websites to block. 
-      <a href="setup.html" style="color: #721c24; text-decoration: underline; font-weight: bold;">Complete Setup Now</a>
-    </div>
-    
-    <!-- Status Message -->
-    <div id="statusMessage" class="status-message hidden"></div>
-    
-    <!-- Blocked Sites Management -->
-    <div class="section">
-      <h3>Blocked Sites</h3>
-      <p>Add websites to block (e.g., facebook.com, twitter.com):</p>
+  <h1>BuddyBlock Options</h1>
+  
+  <!-- Setup Warning Banner -->
+  <div id="setupWarning" class="status-message error hidden">
+    ⚠️ <strong>Setup Required:</strong> You must complete the initial setup before adding websites to block. 
+    <a href="setup.html">Complete Setup Now</a>
+  </div>
+  
+  <!-- Status Message -->
+  <div id="statusMessage" class="status-message hidden"></div>
+  
+  <!-- Blocked Sites Management -->
+  <div class="section primary">
+    <h3>Blocked Sites</h3>
+    <p>Add websites to block:</p>
+    <div class="input-group">
       <input type="text" id="newSite" placeholder="Enter website domain">
-      <button id="addSiteBtn" class="btn-primary">Add Site</button>
-      
-      <div id="blockedSitesList" style="margin-top: 20px;">
-        <!-- Sites will be populated here -->
-      </div>
+      <button id="addSiteBtn" class="btn-primary">Add</button>
     </div>
     
-    <!-- TOTP Setup Section -->
-    <div class="section">
-      <h3>One-Time Code Authentication</h3>
-      
+    <div id="blockedSitesList">
+      <!-- Sites will be populated here -->
+    </div>
+  </div>
+  
+  <!-- TOTP Setup Section -->
+  <div class="section secondary">
+    <h3>One-Time Code Authentication</h3>
+    
+    <div class="info-box">
+      <p><strong>✓ Setup Complete</strong> — Your one-time code authentication is configured and protecting your blocked sites.</p>
+    </div>
+    
+    <!-- TOTP verification section for showing QR on new device -->
+    <div id="totpVerificationSection">
+      <h4>Show Setup QR for New Device</h4>
+      <p>Need to set up the authenticator on a new phone? Enter your current one-time code to display the setup QR:</p>
+      <div class="input-group">
+        <input type="text" id="totpInput" placeholder="000000" maxlength="6" autocomplete="off" inputmode="numeric">
+        <button id="showSetupQRBtn" class="btn-primary">Show QR</button>
+      </div>
       <div class="info-box">
-        <p><strong>✅ Setup Complete:</strong> Your one-time code authentication is configured and protecting your blocked sites.</p>
-      </div>
-      
-      <!-- TOTP verification section for showing QR on new device -->
-      <div id="totpVerificationSection">
-        <h4>Show Setup QR for New Device</h4>
-        <p>Need to set up the authenticator on a new phone? Enter your current one-time code to display the setup QR:</p>
-        <input type="text" id="totpInput" placeholder="6-digit code" maxlength="6">
-        <button id="showSetupQRBtn" class="btn-primary">Show Setup QR</button>
-        <div class="info-box">
-          <p><strong>Use case:</strong> Setting up the authenticator on a new phone or sharing access with authorized users.</p>
-        </div>
-      </div>
-      
-      <!-- Hidden first time section (no longer used, setup is mandatory at install) -->
-      <div id="firstTimeSection" class="hidden" style="display: none;">
-        <p>Set up your authenticator app by scanning the QR code below. <strong>You can only do this once!</strong></p>
-        <button id="generateTOTPBtn" class="btn-primary">Generate One-Time Code Setup QR</button>
+        <p><strong>Use case:</strong> Setting up the authenticator on a new phone or sharing access with authorized users.</p>
       </div>
     </div>
     
-    <!-- QR Display Section -->
+    <!-- Hidden first time section (no longer used, setup is mandatory at install) -->
+    <div id="firstTimeSection" class="hidden" style="display: none;">
+      <p>Set up your authenticator app by scanning the QR code below. <strong>You can only do this once!</strong></p>
+      <button id="generateTOTPBtn" class="btn-primary">Generate One-Time Code Setup QR</button>
+    </div>
+    
+    <!-- QR Display Section (moved inside secondary section) -->
     <div id="qrContainer" class="qr-container hidden">
       <h3 id="qrTitle">QR Code</h3>
       <canvas id="qrCanvas"></canvas>
       <div class="qr-actions">
-        <button id="downloadQRBtn" class="btn-secondary">Download PNG</button>
+        <button id="downloadQRBtn" class="btn-secondary">Download</button>
         <button id="clearQRBtn" class="btn-secondary">Hide QR</button>
       </div>
       <div class="qr-info">
         <p><small>This QR contains your one-time code setup. Anyone who scans it can generate bypass codes.</small></p>
       </div>
     </div>
-    
-    <!-- Danger Zone -->
-    <div id="dangerZone" class="danger-zone">
-      <h3>⚠️ Danger Zone</h3>
-      <div class="reset-section">
-        <h4>Reset All Settings</h4>
-        <p>This will permanently delete all blocked sites and one-time code configuration.</p>
-        
-        <!-- Show different UI based on TOTP setup status -->
-        <div id="resetWithTOTP" class="hidden">
-          <p><strong>Enter your one-time code to confirm reset:</strong></p>
-          <input type="text" id="resetTotpInput" placeholder="6-digit code" maxlength="6">
-          <button id="resetWithTOTPBtn" class="btn-danger">Reset All Settings</button>
-          <div id="resetError" class="error-message"></div>
-        </div>
-        
-        <div id="resetWithoutTOTP" class="hidden">
-          <p><em>One-time code not set up yet. Reset is available without verification.</em></p>
-          <button id="resetWithoutTOTPBtn" class="btn-danger">Reset All Settings</button>
-        </div>
+  </div>
+  
+  <!-- Danger Zone -->
+  <div id="dangerZone" class="danger-zone">
+    <h3>⚠ Danger Zone</h3>
+    <div class="reset-section">
+      <h4>Reset All Settings</h4>
+      <p>This will permanently delete all blocked sites and one-time code configuration.</p>
+      
+      <!-- Show different UI based on TOTP setup status -->
+      <div id="resetWithTOTP" class="hidden">
+        <p><strong>Enter your one-time code to confirm reset:</strong></p>
+        <input type="text" id="resetTotpInput" placeholder="000000" maxlength="6" autocomplete="off" inputmode="numeric">
+        <button id="resetWithTOTPBtn" class="btn-danger">Reset All Settings</button>
+        <div id="resetError" class="error-message"></div>
+      </div>
+      
+      <div id="resetWithoutTOTP" class="hidden">
+        <p><em>One-time code not set up yet. Reset is available without verification.</em></p>
+        <button id="resetWithoutTOTPBtn" class="btn-danger">Reset All Settings</button>
       </div>
     </div>
+  </div>
 
-    <!-- TOTP Removal Modal -->
-    <div id="totpRemoveModal" class="modal hidden">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2>Verify One-Time Code to Remove Site</h2>
-          <button id="closeModal" class="close-btn" aria-label="Close">&times;</button>
-        </div>
-        <div class="modal-body">
-          <p>You are about to remove: <strong id="siteToRemove"></strong></p>
-          <p>Enter your one-time code to confirm removal:</p>
-          <input type="text" id="totpRemoveInput" placeholder="6-digit code" maxlength="6" autocomplete="off">
-          <div id="totpRemoveError" class="error-message"></div>
-        </div>
-        <div class="modal-footer">
-          <button id="cancelRemove" class="btn-secondary">Cancel</button>
-          <button id="confirmRemove" class="btn-danger">Remove Site</button>
-        </div>
+  <!-- TOTP Removal Modal -->
+  <div id="totpRemoveModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Verify One-Time Code</h2>
+        <button id="closeModal" class="close-btn" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>You are about to remove: <strong id="siteToRemove"></strong></p>
+        <p>Enter your one-time code to confirm removal:</p>
+        <input type="text" id="totpRemoveInput" placeholder="000000" maxlength="6" autocomplete="off" inputmode="numeric">
+        <div id="totpRemoveError" class="error-message"></div>
+      </div>
+      <div class="modal-footer">
+        <button id="cancelRemove" class="btn-secondary">Cancel</button>
+        <button id="confirmRemove" class="btn-danger">Remove</button>
       </div>
     </div>
-
-    <!-- Modal styles -->
-    <style>
-      .modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-      }
-
-      .modal.hidden {
-        display: none;
-      }
-
-      .modal-content {
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        width: 90%;
-        max-width: 400px;
-        animation: slideIn 0.3s ease-out;
-      }
-
-      @keyframes slideIn {
-        from {
-          opacity: 0;
-          transform: translateY(-20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .modal-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px;
-        border-bottom: 1px solid #e0e0e0;
-      }
-
-      .modal-header h2 {
-        margin: 0;
-        color: #2c3e50;
-        font-size: 18px;
-      }
-
-      .close-btn {
-        background: none;
-        border: none;
-        font-size: 28px;
-        cursor: pointer;
-        color: #666;
-        padding: 0;
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .close-btn:hover {
-        color: #000;
-      }
-
-      .modal-body {
-        padding: 20px;
-      }
-
-      .modal-body p {
-        margin: 10px 0;
-        color: #333;
-      }
-
-      .modal-body p strong {
-        color: #e74c3c;
-      }
-
-      .modal-body input[type="text"] {
-        width: 100%;
-        padding: 12px;
-        border: 2px solid #ddd;
-        border-radius: 6px;
-        font-size: 16px;
-        box-sizing: border-box;
-        margin: 10px 0;
-        letter-spacing: 4px;
-        text-align: center;
-      }
-
-      .modal-body input[type="text"]:focus {
-        border-color: #3498db;
-        outline: none;
-      }
-
-      .modal-footer {
-        display: flex;
-        justify-content: flex-end;
-        gap: 10px;
-        padding: 15px 20px;
-        border-top: 1px solid #e0e0e0;
-        background-color: #f9f9f9;
-        border-radius: 0 0 10px 10px;
-      }
-
-      .modal-footer button {
-        padding: 10px 20px;
-      }
-    </style>
   </div>
 
   <script src="lib/otpauth.umd.min.js"></script>

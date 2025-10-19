@@ -1,393 +1,431 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>BuddyBlock - Initial Setup</title>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BuddyBlock - Initial Setup</title>
   <style>
+    /* CSS Variables - Swiss Design System */
+    :root {
+      --color-black: #000000;
+      --color-white: #FFFFFF;
+      --color-red: #e30613;
+      --color-gray: #e0e0e0;
+      --color-gray-light: #f8f8f8;
+      --color-gray-dark: #999999;
+      
+      --font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      
+      --spacing-xs: 8px;
+      --spacing-sm: 16px;
+      --spacing-md: 24px;
+      --spacing-lg: 32px;
+      --spacing-xl: 40px;
+      --spacing-xxl: 48px;
+      
+      --transition-speed: 0.2s;
+    }
+    
+    /* Reset & Base Styles */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
+    
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: var(--font-family);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--color-black);
+      background-color: var(--color-white);
+      background-image: 
+        repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.02) 0px, transparent 1px, transparent 20px, rgba(0, 0, 0, 0.02) 21px),
+        repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.02) 0px, transparent 1px, transparent 20px, rgba(0, 0, 0, 0.02) 21px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+      padding: var(--spacing-md);
     }
-
+    
+    /* Container */
     .setup-container {
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-      max-width: 600px;
+      max-width: 800px;
       width: 100%;
-      overflow: hidden;
     }
-
+    
+    /* Header */
     .header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 30px;
-      text-align: center;
+      border-bottom: 2px solid var(--color-black);
+      margin-bottom: var(--spacing-xl);
+      padding-bottom: var(--spacing-md);
     }
-
+    
     .header h1 {
-      font-size: 28px;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: var(--spacing-xs);
     }
-
+    
     .header p {
       font-size: 16px;
-      opacity: 0.95;
+      font-weight: 400;
     }
-
-    .content {
-      padding: 40px;
-    }
-
+    
+    /* Step Section */
     .step {
-      margin-bottom: 35px;
+      margin-bottom: var(--spacing-xl);
     }
-
+    
     .step-header {
       display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 15px;
+      align-items: baseline;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-md);
+      padding-bottom: var(--spacing-sm);
+      border-bottom: 2px solid var(--color-gray);
     }
-
+    
     .step-number {
-      background: #667eea;
-      color: white;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 16px;
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--color-red);
+      line-height: 1;
     }
-
+    
     .step-title {
-      font-size: 20px;
-      font-weight: 600;
-      color: #2c3e50;
+      font-size: 18px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
-
+    
+    /* QR Section */
     .qr-section {
-      background: #f8f9fa;
-      border: 3px solid #667eea;
-      border-radius: 12px;
-      padding: 25px;
+      background-color: var(--color-white);
+      border: 2px solid var(--color-red);
+      padding: var(--spacing-lg);
       text-align: center;
-      margin: 20px 0;
+      margin-bottom: var(--spacing-md);
     }
-
+    
     #qrCanvas {
-      margin: 15px auto;
       display: block;
-      background: white;
-      padding: 15px;
-      border-radius: 8px;
+      margin: 0 auto;
+      background-color: var(--color-white);
     }
-
-    .qr-actions {
-      margin-top: 15px;
-    }
-
-    .btn-secondary {
-      background-color: #6c757d;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
-      margin: 5px;
-      transition: background-color 0.2s;
-    }
-
-    .btn-secondary:hover {
-      background-color: #5a6268;
-    }
-
-    .instructions {
-      background: #e8f4fd;
-      border-left: 4px solid #3498db;
-      border-radius: 6px;
-      padding: 20px;
-      margin: 20px 0;
-    }
-
-    .instructions h4 {
-      color: #2c3e50;
-      margin-bottom: 12px;
-      font-size: 16px;
-    }
-
-    .instructions ol {
-      margin-left: 20px;
-      color: #34495e;
-      line-height: 1.8;
-    }
-
-    .instructions li {
-      margin: 8px 0;
-    }
-
-    .warning-box {
-      background: #fff3cd;
-      border: 2px solid #ffc107;
-      border-radius: 8px;
-      padding: 15px;
-      margin: 20px 0;
-      display: flex;
-      gap: 12px;
-      align-items: start;
-    }
-
-    .warning-box .icon {
-      font-size: 24px;
-      flex-shrink: 0;
-    }
-
-    .warning-box .text {
-      color: #856404;
-      line-height: 1.6;
-    }
-
-    .warning-box .text strong {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .verify-section {
-      background: #f8f9fa;
-      border-radius: 12px;
-      padding: 25px;
-      margin: 20px 0;
-    }
-
-    .verify-section p {
-      color: #2c3e50;
-      margin-bottom: 15px;
-      font-size: 15px;
-      font-weight: 500;
-    }
-
-    #verifyInput {
-      width: 100%;
-      padding: 15px;
-      border: 2px solid #ddd;
-      border-radius: 8px;
-      font-size: 20px;
-      text-align: center;
-      letter-spacing: 8px;
-      font-weight: bold;
-      margin-bottom: 15px;
-      transition: border-color 0.2s;
-    }
-
-    #verifyInput:focus {
-      border-color: #667eea;
-      outline: none;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      border: none;
-      padding: 15px 30px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: 600;
-      width: 100%;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-    }
-
-    .btn-primary:disabled {
-      background: #95a5a6;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .error-message {
-      background: #f8d7da;
-      color: #721c24;
-      border: 1px solid #f5c6cb;
-      border-radius: 6px;
-      padding: 12px;
-      margin-top: 15px;
-      text-align: center;
-      font-weight: 500;
-      display: none;
-    }
-
-    .error-message.show {
-      display: block;
-    }
-
-    .success-message {
-      background: #d4edda;
-      color: #155724;
-      border: 1px solid #c3e6cb;
-      border-radius: 6px;
-      padding: 12px;
-      margin-top: 15px;
-      text-align: center;
-      font-weight: 500;
-      display: none;
-    }
-
-    .success-message.show {
-      display: block;
-    }
-
+    
     .loading {
       text-align: center;
-      padding: 20px;
-      color: #666;
+      padding: var(--spacing-md);
     }
-
+    
     .spinner {
-      border: 3px solid #f3f3f3;
-      border-top: 3px solid #667eea;
-      border-radius: 50%;
       width: 40px;
       height: 40px;
+      border: 3px solid var(--color-gray);
+      border-top: 3px solid var(--color-black);
+      border-radius: 50%;
+      margin: 0 auto var(--spacing-sm);
       animation: spin 1s linear infinite;
-      margin: 20px auto;
     }
-
+    
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-
+    
+    .loading p {
+      font-size: 14px;
+      color: var(--color-black);
+    }
+    
+    /* Secret Info */
     .secret-info {
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      padding: 12px;
-      margin: 15px 0;
+      background-color: var(--color-gray-light);
+      border: 1px solid var(--color-gray);
+      padding: var(--spacing-sm);
+      margin-top: var(--spacing-md);
       font-family: 'Courier New', monospace;
       font-size: 13px;
-      color: #666;
-      text-align: center;
       word-break: break-all;
+      display: none;
     }
-
+    
+    .secret-info.visible {
+      display: block;
+    }
+    
     .secret-label {
       font-size: 11px;
-      color: #999;
-      margin-bottom: 5px;
+      font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 1px;
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    /* QR Actions */
+    .qr-actions {
+      margin-top: var(--spacing-md);
+      display: none;
+    }
+    
+    .qr-actions.visible {
+      display: block;
+    }
+    
+    /* Buttons */
+    .btn-secondary {
+      background-color: var(--color-gray-dark);
+      color: var(--color-white);
+      border: none;
+      padding: 10px 20px;
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      margin: 0 var(--spacing-xs);
+      transition: background-color var(--transition-speed) ease;
+    }
+    
+    .btn-secondary:hover {
+      background-color: #7f8c8d;
+    }
+    
+    .btn-primary {
+      width: 100%;
+      background-color: var(--color-red);
+      color: var(--color-white);
+      border: none;
+      padding: var(--spacing-sm) var(--spacing-xxl);
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background-color var(--transition-speed) ease;
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--color-black);
+    }
+    
+    .btn-primary:disabled {
+      background-color: var(--color-gray-dark);
+      cursor: not-allowed;
+    }
+    
+    /* Instructions */
+    .instructions {
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .instructions ol {
+      margin-left: var(--spacing-md);
+      line-height: 1.8;
+    }
+    
+    .instructions li {
+      margin: var(--spacing-xs) 0;
+    }
+    
+    /* Warning Box */
+    .warning-box {
+      border: 2px solid var(--color-black);
+      border-left: 3px solid var(--color-red);
+      padding: var(--spacing-sm);
+      margin: var(--spacing-md) 0;
+      background-color: var(--color-white);
+    }
+    
+    .warning-box .text {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    
+    .warning-box .text strong {
+      font-weight: 700;
+      display: block;
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    /* Verify Section */
+    .verify-section {
+      background-color: var(--color-gray-light);
+      padding: var(--spacing-md);
+    }
+    
+    .verify-section p {
+      margin-bottom: var(--spacing-sm);
+      font-size: 15px;
+    }
+    
+    /* Input Field */
+    input[type="text"] {
+      width: 100%;
+      border: none;
+      border-bottom: 2px solid var(--color-black);
+      background: transparent;
+      padding: var(--spacing-sm) 0;
+      font-family: var(--font-family);
+      font-size: 28px;
+      font-weight: 400;
+      letter-spacing: 8px;
+      text-align: center;
+      transition: border-color var(--transition-speed) ease;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    input[type="text"]:focus {
+      outline: none;
+      border-bottom-color: var(--color-red);
+    }
+    
+    input[type="text"]::placeholder {
+      color: var(--color-gray);
+      letter-spacing: 8px;
+    }
+    
+    /* Messages */
+    .error-message,
+    .success-message {
+      padding: var(--spacing-sm);
+      margin-top: var(--spacing-sm);
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: none;
+    }
+    
+    .error-message.show {
+      display: block;
+      background-color: var(--color-black);
+      color: var(--color-white);
+    }
+    
+    .success-message.show {
+      display: block;
+      background-color: var(--color-white);
+      color: var(--color-black);
+      border: 2px solid var(--color-black);
+    }
+    
+    /* Responsive */
+    @media (max-width: 600px) {
+      .header h1 {
+        font-size: 36px;
+      }
+      
+      .step-number {
+        font-size: 40px;
+      }
+      
+      .step-title {
+        font-size: 16px;
+      }
+      
+      body {
+        padding: var(--spacing-sm);
+      }
+      
+      .qr-section {
+        padding: var(--spacing-md);
+      }
+      
+      .btn-secondary {
+        display: block;
+        width: 100%;
+        margin: var(--spacing-xs) 0;
+      }
     }
   </style>
 </head>
 <body>
   <div class="setup-container">
+    <!-- Header -->
     <div class="header">
-      <h1>
-        <span>🔐</span>
-        <span>BuddyBlock Setup</span>
-      </h1>
+      <h1>BuddyBlock Setup</h1>
       <p>One-time setup required before you can block websites</p>
     </div>
 
-    <div class="content">
-      <!-- Step 1: QR Code -->
-      <div class="step">
-        <div class="step-header">
-          <div class="step-number">1</div>
-          <div class="step-title">Your Unique QR Code</div>
+    <!-- Step 1: QR Code -->
+    <div class="step">
+      <div class="step-header">
+        <div class="step-number">01</div>
+        <div class="step-title">Your Unique QR Code</div>
+      </div>
+      
+      <div class="qr-section">
+        <div id="loadingSpinner" class="loading">
+          <div class="spinner"></div>
+          <p>Generating your secure QR code...</p>
         </div>
-        
-        <div class="qr-section">
-          <div id="loadingSpinner" class="loading">
-            <div class="spinner"></div>
-            <p>Generating your secure QR code...</p>
-          </div>
-          <canvas id="qrCanvas" style="display: none;"></canvas>
-          <div class="secret-info" id="secretInfo" style="display: none;">
-            <div class="secret-label">Manual Entry Code (if QR scan fails)</div>
-            <div id="secretText"></div>
-          </div>
-          <div class="qr-actions" id="qrActions" style="display: none;">
-            <button id="downloadQRBtn" class="btn-secondary">💾 Download QR Code</button>
-            <button id="toggleSecretBtn" class="btn-secondary">🔑 Show Manual Code</button>
-          </div>
+        <canvas id="qrCanvas" style="display: none;"></canvas>
+        <div class="secret-info" id="secretInfo">
+          <div class="secret-label">Manual Entry Code</div>
+          <div id="secretText"></div>
+        </div>
+        <div class="qr-actions" id="qrActions">
+          <button id="downloadQRBtn" class="btn-secondary">Download</button>
+          <button id="toggleSecretBtn" class="btn-secondary">Show Code</button>
         </div>
       </div>
+    </div>
 
-      <!-- Step 2: Instructions -->
-      <div class="step">
-        <div class="step-header">
-          <div class="step-number">2</div>
-          <div class="step-title">Scan with Authenticator App</div>
-        </div>
-        
-        <div class="instructions">
-          <h4>📱 Using Google Authenticator or Authy:</h4>
-          <ol>
-            <li>Open your authenticator app (Google Authenticator, Authy, etc.)</li>
-            <li>Tap the <strong>"+"</strong> button to add a new account</li>
-            <li>Choose <strong>"Scan QR code"</strong></li>
-            <li>Point your camera at the QR code above</li>
-            <li>Save the account (it will appear as "BuddyBlock")</li>
-          </ol>
-        </div>
-
-        <div class="warning-box">
-          <div class="icon">⚠️</div>
-          <div class="text">
-            <strong>Important Security Notice:</strong>
-            This QR code gives complete control over your blocked websites. Keep it private! 
-            Only share with your accountability partner who will help you stay focused.
-            You can download it as a backup, but store it securely.
-          </div>
-        </div>
+    <!-- Step 2: Instructions -->
+    <div class="step">
+      <div class="step-header">
+        <div class="step-number">02</div>
+        <div class="step-title">Scan with Authenticator</div>
+      </div>
+      
+      <div class="instructions">
+        <ol>
+          <li>Open your authenticator app (Google Authenticator, Authy, etc.)</li>
+          <li>Tap the <strong>+</strong> button to add a new account</li>
+          <li>Choose <strong>Scan QR code</strong></li>
+          <li>Point your camera at the QR code above</li>
+          <li>Save the account (it will appear as "BuddyBlock")</li>
+        </ol>
       </div>
 
-      <!-- Step 3: Verification -->
-      <div class="step">
-        <div class="step-header">
-          <div class="step-number">3</div>
-          <div class="step-title">Verify Setup</div>
+      <div class="warning-box">
+        <div class="text">
+          <strong>Important Security Notice</strong>
+          This QR code gives complete control over your blocked websites. Keep it private! Only share with your accountability partner who will help you stay focused.
         </div>
-        
-        <div class="verify-section">
-          <p>✅ Have you scanned the QR code? Enter the 6-digit code from your authenticator app to complete setup:</p>
-          <input 
-            type="text" 
-            id="verifyInput" 
-            placeholder="000000" 
-            maxlength="6" 
-            autocomplete="off"
-            pattern="[0-9]*"
-            inputmode="numeric"
-          >
-          <button id="verifyBtn" class="btn-primary" disabled>Complete Setup</button>
-          <div id="errorMessage" class="error-message"></div>
-          <div id="successMessage" class="success-message"></div>
-        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Verification -->
+    <div class="step">
+      <div class="step-header">
+        <div class="step-number">03</div>
+        <div class="step-title">Verify Setup</div>
+      </div>
+      
+      <div class="verify-section">
+        <p>Enter the 6-digit code from your authenticator app to complete setup:</p>
+        <input 
+          type="text" 
+          id="verifyInput" 
+          placeholder="000000" 
+          maxlength="6" 
+          autocomplete="off"
+          pattern="[0-9]*"
+          inputmode="numeric"
+        >
+        <button id="verifyBtn" class="btn-primary" disabled>Complete Setup</button>
+        <div id="errorMessage" class="error-message"></div>
+        <div id="successMessage" class="success-message"></div>
       </div>
     </div>
   </div>
@@ -397,4 +435,3 @@
   <script src="setup.js"></script>
 </body>
 </html>
-
